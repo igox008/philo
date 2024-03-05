@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:47:47 by alaassir          #+#    #+#             */
-/*   Updated: 2024/02/22 13:43:25 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/03/04 00:06:34 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,20 @@ void	check_arg(char *str)
 	while (*str && *str == ' ')
 		str++;
 	if (!str[i])
-		exit(1);
+		out(1);
 	while (str[i])
 	{
 		if (i > 0 && !(str[i] >= '0' && str[i] <= '9'))
-			exit(1);
+			out(1);
 		else if (!(str[i] >= '0' && str[i] <= '9')
 			&& str[i] != '+' && str[i] != '-')
-			exit(1);
+			out(1);
 		if (str[i] >= '0' && str[i] <= '9')
 			c++;
 		i++;
 	}
 	if (!c)
-		exit(1);
+		out(1);
 }
 
 void	get_res(char *s, t_data *p)
@@ -70,28 +70,5 @@ void	parse_it(int ac, char **av, t_data *p)
 		}
 	}
 	else
-		exit(1);
-}
-
-void	innit_data(t_data *i)
-{
-	int	n;
-
-	i = 0;
-	i->philos = (t_philo *)malloc(sizeof(t_philo) * i->n_philo);
-	if (!i->philos)
-		exit(2);
-	i->forks = (t_fork *)malloc(sizeof(t_fork) * i->n_philo);
-	if (!i->forks)
-		(free(i->philos), exit(2));
-	i->time = get_time;
-	while (n < i->n_philo)
-	{
-		i->philos[n].id = i + 1;
-		i->philos[n].last_eat = i->time();
-		i->philos[n].info = i;
-		i->philos[n].n_eat = 0;
-		i->philos[n].is_finish = false;
-		n++;
-	}
+		out(1);
 }
